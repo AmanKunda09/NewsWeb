@@ -89,7 +89,7 @@ const Navbar = () => {
                 <Link
                   class="nav-link active text-white"
                   aria-current="page"
-                  to="/terminology"
+                  to="/technology"
                 >
                   Technology
                 </Link>
