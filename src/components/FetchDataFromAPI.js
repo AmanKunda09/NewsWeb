@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-const FetchDataFromAPI = () => {
+const FetchDataFromAPI = ({ cat }) => {
   const [Data, setData] = useState("");
   const FetchData = async () => {
     await axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=in&apiKey=54ed27d0cc844bbdb9a83d10ded8c2fa"
+        cat
+          ? `https://newsapi.org/v2/top-headlines?country=in&category=${cat}&apiKey=54ed27d0cc844bbdb9a83d10ded8c2fa`
+          : "https://newsapi.org/v2/top-headlines?country=in&apiKey=54ed27d0cc844bbdb9a83d10ded8c2fa"
       )
       .then((res) => setData(res.data.articles));
   };
   useEffect(() => {
     FetchData();
-  }, []);
+  }, [cat]);
 
   return (
     <div className="container my-4">
-      <h3>TOP HEADLINES</h3>
-      <div className="container d-flex justify-content-center align-items-center flex-column my-3">
+      <h3>
+        <u>TOP HEADLINES</u>
+      </h3>
+      <div
+        className="container d-flex justify-content-center align-items-center flex-column my-3"
+        style={{ minHeight: "100vh" }}
+      >
         {Data
           ? Data.map((item) => (
               <div
