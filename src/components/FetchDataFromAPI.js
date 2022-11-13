@@ -3,16 +3,17 @@ import axios from "axios";
 
 const FetchDataFromAPI = ({ cat }) => {
   const [Data, setData] = useState("");
-  const FetchData = async () => {
-    await axios
-      .get(
-        cat
-          ? `https://newsapi.org/v2/top-headlines?country=in&category=${cat}&apiKey=54ed27d0cc844bbdb9a83d10ded8c2fa`
-          : "https://newsapi.org/v2/top-headlines?country=in&apiKey=54ed27d0cc844bbdb9a83d10ded8c2fa"
-      )
-      .then((res) => setData(res.data.articles));
-  };
+
   useEffect(() => {
+    const FetchData = async () => {
+      await axios
+        .get(
+          cat
+            ? `https://newsapi.org/v2/top-headlines?country=in&category=${cat}&apiKey=54ed27d0cc844bbdb9a83d10ded8c2fa`
+            : "https://newsapi.org/v2/top-headlines?country=in&apiKey=54ed27d0cc844bbdb9a83d10ded8c2fa"
+        )
+        .then((res) => setData(res.data.articles));
+    };
     FetchData();
   }, [cat]);
 
